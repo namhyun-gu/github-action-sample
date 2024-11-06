@@ -1,0 +1,12 @@
+name: Wrapped Job
+on:
+  workflow_call:
+    inputs:
+      target:
+        type: string
+
+jobs:
+  wrapped:
+    uses: ./.github/workflows/job.yml
+    with:
+      target: ${{ inputs.target }}
