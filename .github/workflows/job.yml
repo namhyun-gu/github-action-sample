@@ -1,0 +1,13 @@
+name: Job
+on:
+  workflow_call:
+    inputs:
+      target:
+        type: string
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "Nest Build ${{ inputs.target }}"
+          sleep 10
