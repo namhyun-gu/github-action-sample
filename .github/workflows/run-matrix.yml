@@ -18,6 +18,7 @@ jobs:
 
   job:
     uses: ./.github/workflows/wrapped_job.yml
+    name: Job ${{ matrix.target }}
     needs:
       - prepare
     strategy:
