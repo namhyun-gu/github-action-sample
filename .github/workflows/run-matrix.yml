@@ -2,8 +2,24 @@ name: Run matrix
 on:
   workflow_dispatch:
 jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.matrix.outputs.target }}
+    steps:
+      - uses: actions/github-script@v6
+        id: matrix
+        with:
+          github-token: ${{ secrets.GIT_TOKEN }}
+          script: |
+            core.setOutput("target", {
+              target: ["a", "b", "c"]
+            })
+
   job:
     uses: ./.github/workflows/wrapped_job.yml
+    needs:
+      - prepare
     strategy:
       matrix:
         target: [a, b, c]
